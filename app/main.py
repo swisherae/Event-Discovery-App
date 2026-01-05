@@ -25,8 +25,8 @@ def health_check():
 
 @app.get("/events")
 def get_events():
-    conn = get_conn()
     try:
+        conn = get_conn()
         cur = conn.cursor()
         cur.execute("SELECT id, name, location, date FROM events ORDER BY date ASC;")
         rows = cur.fetchall()
@@ -34,5 +34,5 @@ def get_events():
             {"id": r[0], "name": r[1], "location": r[2], "date": r[3].isoformat()}
             for r in rows
         ]
-    finally:
-        conn.close()
+    except Exception as e:
+        return {"error": str(e)}
