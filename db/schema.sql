@@ -4,3 +4,4 @@ CREATE TABLE IF NOT EXISTS events (
   location TEXT NOT NULL,
   date DATE NOT NULL
 );
+
